@@ -10,6 +10,15 @@ I build things at the boundary between hardware and software: FPGA accelerators,
 
 ## 🔧 Digital Design
 
+### Low-Latency Nasdaq ITCH 5.0 Feed Handler & Order Book on FPGA
+`SystemVerilog` `Kria KR260` `10G Ethernet` `URAM` `Vivado` `cocotb`
+
+**[→ Repository](https://github.com/Cyllocoding/Nasdaq-ITCH-5.0-Feed-Handler-Order-Book-on-FPGA)**
+
+A deterministic market-data pipeline on a Zynq UltraScale+ that ingests a Nasdaq TotalView-ITCH 5.0 feed over 10G Ethernet (MoldUDP64/UDP multicast), tracks every live order for eight subscribed stocks, and emits best-bid/best-ask updates in a fixed ~130 ns from last byte on the wire — a single 156.25 MHz clock domain with no clock crossing on the fast path.
+
+The parser assembles variable-length, lane-unaligned ITCH messages into a 320-bit register with ping-pong buffering, chosen over realignment because the ≤1-message-per-beat property it preserves is what lets every downstream block run at line rate. Order state lives in a 4-way set-associative hash table built from 32 URAMs (16,384 slots, XOR-folded 64-bit IDs, 3-bit pseudo-LRU, slot-granularity forwarding to close the read-modify-write hazard), sized from a Poisson overflow model to keep the load factor at λ ≤ 0.5; it is an inclusive write-through cache of a 256 MB DDR backing store, so eviction is free and the DRAM's variable latency never touches the fast path. The price book is a dense ±512-tick window per side with a flip-flop occupancy bitmap and a hierarchical priority encoder, so finding the next-best level when the top of book empties is a fixed 3-cycle search rather than a data-dependent walk. Verified against a Python golden model with cocotb/Verilator from packetised Nasdaq sample data, then on hardware with `tcpreplay` at line rate.
+
 ### Real-Time FPGA Electromagnetic Field Visualiser
 `SystemVerilog` `PYNQ-Z1` `FDTD` `HDMI` `Vivado`
 
@@ -94,7 +103,7 @@ A functional Unix shell implementing process creation and execution via `fork`/`
 
 **Languages** · C · C++ · Rust · Python · Java · JavaScript · R · SQL · Tcl · SystemVerilog · Verilog
 
-**Hardware** · Vivado · Quartus · Verilator · PYNQ-Z1 (Zynq-7000) · MicroBlaze · AXI-Lite/Stream/DMA/VDMA · I²C · UART · GPIO · timing closure · BRAM/DSP resource planning · fixed-point arithmetic · clock-domain crossing
+**Hardware** · Vivado · Quartus · Verilator · cocotb · PYNQ-Z1 (Zynq-7000) · Kria KR260 (Zynq UltraScale+) · MicroBlaze · AXI-Lite/Stream/DMA/VDMA · 10G Ethernet · I²C · UART · GPIO · timing closure · BRAM/URAM/DSP resource planning · fixed-point arithmetic · clock-domain crossing
 
 **AI & ML** · PyTorch · Brevitas · quantisation-aware training · INT8 inference
 
