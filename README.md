@@ -79,7 +79,7 @@ A complete C90 compiler that lowers C source to RISC-V assembly, implementing a 
 ### Custom Dynamic Memory Allocator
 `C` `mmap` `Systems Programming`
 
-**[→ Repository](ADD_LINK_HERE)**
+**[→ Repository](https://github.com/Cyllocoding/smalloc-memory-allocator/tree/main)**
 
 A drop-in `malloc`/`free` replacement built over `mmap`-reserved arenas, using an intrusive free list with in-band metadata headers and byte-level pointer arithmetic, plus block splitting, address-ordered insertion, and adjacent-block coalescing. Benchmarked first-fit against best-fit placement and measured the effect of coalescing under a 50,000-request stress harness, instrumenting external fragmentation, heap utilisation at failure, and peak free-list length to quantify the fragmentation/scan-cost tradeoff. Extended to segregated size-class arenas (TINY/SMALL/MEDIUM, each `mmap`-backed with its own free list and escalation on exhaustion), routing by request size and resolving zone ownership on free by pointer range.
 
