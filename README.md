@@ -22,7 +22,7 @@ The parser assembles variable-length, lane-unaligned ITCH messages into a 320-bi
 ### Real-Time FPGA Electromagnetic Field Visualiser
 `SystemVerilog` `PYNQ-Z1` `FDTD` `HDMI` `Vivado`
 
-**[→ Repository](ADD_LINK_HERE)**
+**[→ Repository](https://github.com/TahaMunir2/ElectroMagnetic-FPGA-3D-Renderer)**
 
 An educational instrument that makes Maxwell's equations visible: a 2D FDTD solver and a ray-marching 3D renderer running together on a single PYNQ-Z1, drawing a live 128×128 electromagnetic field to HDMI at 640×480 and 60 fps.
 
@@ -38,41 +38,33 @@ An end-to-end machine learning deployment, from training to silicon. A CNN is tr
 ### Fuzz-Testing FPGA Place-and-Route Tools (UROP)
 `Python` `Vivado` `Quartus` `FUZNET`
 
-**[→ Repository](ADD_LINK_HERE)**
+**[→ Repository](https://github.com/splogdes/fuznet/tree/main)**
 
 Undergraduate research on whether place-and-route tools actually do what they claim. Extended FUZNET, a randomised netlist generator for fuzz-testing P&R tools, from Xilinx Vivado to Intel Quartus, building the flow to compile, execute, and compare randomly generated designs across both vendor toolchains. Widened the generated design space beyond the original primitive set to include block RAM and DSP units, reaching classes of bugs the prior generator could not. Added checks on the physical placement and routing themselves rather than only netlist equivalence before and after optimisation — catching faults such as overlapping component placement that equivalence checking cannot detect by construction.
 
 ### RISC-V CPU — Best-Performing Design of the Cohort
 `SystemVerilog` `RV32I` `Verilator`
 
-**[→ Repository](ADD_LINK_HERE)**
+**[→ Repository](https://github.com/TahaMunir2/RISC-V-RV32IM-FPGA)**
 
 A 32-bit RV32I processor built from scratch, developed from a single-cycle design into a 5-stage pipelined CPU with custom control, ALU, and datapath modules, then extended with data forwarding, branch prediction, and an L1/L2 cache hierarchy. A further out-of-order superscalar extension adds register renaming, reservation stations, a reorder buffer, and a common data bus for Tomasulo-style parallel instruction issue. Judged the highest-performing processor of the year group in a cohort-wide design project.
 
 ### Two-Node Real-Time IoT Platform — Maze Runner & Pac-Man
 `SystemVerilog` `PYNQ-Z1` `AXI-DMA` `AWS` `OpenCV`
 
-**[→ Repository](ADD_LINK_HERE)**
+**[→ Repository](https://github.com/TahaMunir2/Dual-FPGA-Rover-Vision-Platform)**
 
 Two physical games built on a pair of PYNQ-Z1 boards linked through an AWS relay server, with game state projected onto the floor beneath a real rover.
 
 Pathfinding runs entirely in programmable logic: a BFS solver implemented as a 3-state Moore FSM performing wavefront relaxation, and an A* variant using a Manhattan heuristic and a flat priority queue, with the maze streamed in over AXI-DMA in a single burst rather than polled through AXI-Lite registers. Closing timing at 100 MHz required splitting the BFS distance-map critical path into a 3-stage pipeline, moving worst negative slack from −1.9 ns to +0.5 ns for roughly 1% cycle overhead. Four line-of-sight ghost agents run in parallel in fabric, integrated with the server at sub-100 ms end-to-end round-trip latency. A camera pipeline handles hardware downsampling, HSV thresholding, and perspective warp; the rover navigates by stepper motors with gyro-corrected heading.
 
-### Autonomous Rover — Electronics Design Project
-`Embedded C` `Sensors` `Motor Control` `Web`
-
-**[→ Repository](ADD_LINK_HERE)**
-
-A rover that navigates an obstacle arena at speed while detecting and decoding several classes of signal through its sensors, paired with a web interface for remote control and storage of the collected sensor data.
-
----
 
 ## ⚙️ Software Systems and Compilers
 
 ### C90-to-RISC-V Compiler
 `C++` `RISC-V` `Compilers`
 
-**[→ Repository](ADD_LINK_HERE)**
+**[→ Repository](https://github.com/LangProc/langproc-2025-cw-BestCompiler)**
 
 A complete C90 compiler that lowers C source to RISC-V assembly, implementing a full lexer, parser, AST, and code generation pipeline conforming to the RV32IMFD ILP32D ABI. Achieves a 95% pass rate on the assessed test suite, including 100% of seen tests. Extended well beyond the specification with a middle-end: a custom three-address-code IR over basic blocks and a control-flow graph, enabling graph-colouring register allocation over liveness analysis alongside IR-dependent optimisation passes.
 
@@ -86,14 +78,14 @@ A drop-in `malloc`/`free` replacement built over `mmap`-reserved arenas, using a
 ### Concurrent UDP Client–Server Messaging System
 `C` `pthreads` `UDP` `Network Programming`
 
-**[→ Repository](ADD_LINK_HERE)**
+**[→ Repository](https://github.com/TahaMunir2/Software-Assignment)**
 
 A concurrent client–server system over raw UDP sockets with a custom application-level protocol, a dispatcher thread accepting datagrams, and per-request handler threads. Includes a reliability layer over UDP — sequence numbering, acknowledgements, and retransmission — recovering ordering and delivery guarantees over an unreliable datagram transport. Shared client state is synchronised with POSIX reader–writer locks, allowing parallel readers while serialising mutations, and liveness is tracked through a thread-safe min-heap keyed on last-activity timestamp that drives automated ping and eviction.
 
 ### Unix Shell (s3)
 `C` `POSIX` `Process Management`
 
-**[→ Repository](ADD_LINK_HERE)**
+**[→ Repository](https://github.com/TahaMunir2/Software-Assignment)**
 
 A functional Unix shell implementing process creation and execution via `fork`/`execvp`/`wait`, I/O redirection and arbitrary-length pipelines via `dup2`/`pipe`, shell built-ins, batched commands, and arbitrarily nested subshells. Extended past the specification with globbing, foreground/background job control, command history, and tab completion.
 
